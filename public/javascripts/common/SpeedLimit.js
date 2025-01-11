@@ -209,7 +209,17 @@ function SpeedLimit(panorama, coords, isOnboarding, panoContainer) {
                 number,
                 sub
             };
-            self.speedLimitVisible = true
+            // Check if the current label is a NoCurbRamp before initializing speed limit.
+            if (panoContainer !== null) { 
+                let labelType = panoContainer.getCurrentLabel().getAuditProperty("labelType");
+                if (labelType === "NoCurbRamp") {
+                    self.speedLimitVisible = true;
+                } else {
+                    self.speedLimitVisible = false;
+                }
+            } else {
+                self.speedLimitVisible = true;
+            }       
         } else {
             self.speedLimitVisible = false
         }
